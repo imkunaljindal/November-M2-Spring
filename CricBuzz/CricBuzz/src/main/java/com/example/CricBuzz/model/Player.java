@@ -12,6 +12,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Player {
 
