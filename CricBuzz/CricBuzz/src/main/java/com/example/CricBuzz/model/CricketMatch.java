@@ -1,5 +1,6 @@
 package com.example.CricBuzz.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -33,5 +34,6 @@ public class CricketMatch {
     @JoinTable(name = "team_match",
     joinColumns = @JoinColumn(name="cricket_match_id"),
     inverseJoinColumns = @JoinColumn(name = "team_id"))
+    @JsonManagedReference
     List<Team> teams;
 }

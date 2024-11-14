@@ -32,7 +32,11 @@ public class PlayerController {
     public List<PlayerResponse> getAllByAgeGreaterThanAndSpeciality(@PathVariable("age") int age,
                                                @PathVariable("speciality") Speciality speciality) {
         return playerService.getAllByAgeGreaterThanAndSpeciality(age,speciality);
+    }
 
+    @GetMapping
+    public Player getPlayer(@RequestParam int playerId) {
+        return playerService.getPlayer(playerId);
     }
 
 }

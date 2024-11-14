@@ -3,6 +3,7 @@ package com.example.CricBuzz.service;
 import com.example.CricBuzz.convertor.PlayerConvertor;
 import com.example.CricBuzz.dto.request.PlayerRequest;
 import com.example.CricBuzz.dto.response.PlayerResponse;
+import com.example.CricBuzz.exception.PlayerNotFoundException;
 import com.example.CricBuzz.model.Player;
 import com.example.CricBuzz.model.enums.Speciality;
 import com.example.CricBuzz.repository.PlayerRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PlayerService {
@@ -43,5 +45,14 @@ public class PlayerService {
         }
 
         return playerResponses;
+    }
+
+    public Player getPlayer(int playerId) {
+        Optional<Player> playerOptional = playerRepository.findById(playerId);
+        if(playerOptional.isEmpty()) {
+            throw new PlayerNotFoundException("Invalid player id");
+        }
+
+        return playerOptional.get();
     }
 }

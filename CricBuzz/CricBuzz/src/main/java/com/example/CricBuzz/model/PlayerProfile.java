@@ -1,5 +1,7 @@
 package com.example.CricBuzz.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -10,6 +12,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Builder
 public class PlayerProfile {
 
     @Id
@@ -26,6 +29,7 @@ public class PlayerProfile {
 
     @OneToOne
     @JoinColumn
+    @JsonBackReference
     Player player;
 
 }

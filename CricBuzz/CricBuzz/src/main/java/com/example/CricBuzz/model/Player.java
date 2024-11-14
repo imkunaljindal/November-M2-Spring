@@ -3,6 +3,8 @@ package com.example.CricBuzz.model;
 
 import com.example.CricBuzz.model.enums.Gender;
 import com.example.CricBuzz.model.enums.Speciality;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -31,10 +33,12 @@ public class Player {
     Speciality speciality;
 
     @OneToOne(mappedBy = "player",cascade = CascadeType.ALL)
+    @JsonManagedReference
     PlayerProfile profile;
 
     @ManyToOne
     @JoinColumn
+    @JsonManagedReference
     Team team;
 
 }
