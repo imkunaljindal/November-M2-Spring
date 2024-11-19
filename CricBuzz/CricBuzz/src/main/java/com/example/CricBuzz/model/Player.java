@@ -32,6 +32,8 @@ public class Player {
     @Enumerated(EnumType.STRING)
     Speciality speciality;
 
+    String email;
+
     @OneToOne(mappedBy = "player",cascade = CascadeType.ALL)
     @JsonManagedReference
     PlayerProfile profile;

@@ -8,6 +8,8 @@ import com.example.CricBuzz.model.Player;
 import com.example.CricBuzz.model.enums.Speciality;
 import com.example.CricBuzz.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,10 +22,28 @@ public class PlayerService {
     @Autowired
     PlayerRepository playerRepository;
 
+    @Autowired
+    JavaMailSender javaMailSender;
+
     public PlayerResponse addPlayer(PlayerRequest playerRequest) {
         Player player = PlayerConvertor.playerRequestToPlayer(playerRequest);
         Player savedPlayer = playerRepository.save(player);
+        sendEmail(savedPlayer);
         return PlayerConvertor.playerToPlayerResponse(savedPlayer);
+    }
+
+    private void sendEmail(Player player) {
+
+        String text = "Congrats!!" + player.getName() + ". You have been registered on our cricbuzz portal" +
+                ". Your speciality is " + player.getSpeciality();
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("acciojobspring@gmail.com");
+        message.setTo(player.getEmail());
+        message.setSubject("Registration successfull");
+        message.setText(text);
+        javaMailSender.send(message);
+
     }
 
     public List<PlayerResponse> getAllByAgeGreaterThan(int age) {

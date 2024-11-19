@@ -12,6 +12,7 @@ public class PlayerConvertor {
                 .age(playerRequest.getAge())
                 .gender(playerRequest.getGender())
                 .speciality(playerRequest.getSpeciality())
+                .email(playerRequest.getEmail())
                 .build();
     }
 
