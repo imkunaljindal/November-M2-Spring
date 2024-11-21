@@ -7,6 +7,7 @@ import com.example.CricBuzz.exception.PlayerNotFoundException;
 import com.example.CricBuzz.model.Player;
 import com.example.CricBuzz.model.enums.Speciality;
 import com.example.CricBuzz.repository.PlayerRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,10 +18,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class PlayerService {
 
-    @Autowired
-    PlayerRepository playerRepository;
+    final PlayerRepository playerRepository; // constructor injection
+
+//    public PlayerService(PlayerRepository playerRepository) {
+//        this.playerRepository = playerRepository;
+//    }
 
     @Autowired
     JavaMailSender javaMailSender;
